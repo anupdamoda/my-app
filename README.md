@@ -1,3 +1,5 @@
+# This is a react front end app which displays the list of expenses integrated with the Backend Springboot application
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
