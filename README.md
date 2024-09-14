@@ -2,6 +2,10 @@
 
 ![alt text](image.png)
 
+Iteration to include Count on the react app which is being calculated in the backend and displayed on the front end by React
+
+![alt text](image-1.png)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

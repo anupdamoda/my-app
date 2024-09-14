@@ -5,6 +5,7 @@ import axios from 'axios';
 
 function App() {
   const [data, setData] = useState([]);
+  const [value, setValue] = useState(null);
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/expense')
@@ -14,11 +15,28 @@ function App() {
       .catch(error => {
         console.log(error);
       });
+  }, []); 
+
+  useEffect(() => {
+    const fetchValue = async () => {
+      try {
+          const response = await axios.get('http://localhost:8080/api/expense/count'); // Replace with your actual API endpoint
+          setValue(response.data); // Set the fetched value to the state
+          setLoading(false); // Data has been loaded
+      } catch (err) {
+          setError('Error fetching data'); // Set an error message
+          setLoading(false);
+      }
+    };
+    fetchValue();
   }, []);
+  
 
   return (
     <><style>{"table{border:1px solid black;}"}</style><div>
       <h1> Expenses List </h1>
+      <div> AmountSum</div>
+      <div> Count : {value} </div>
       <table>
         <thead>
           <tr> 
