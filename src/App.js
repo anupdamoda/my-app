@@ -33,41 +33,53 @@ function App() {
   
 
   return (
-    <><style>{"table{border:1px solid black;}"}</style><div>
-      <h1> Expenses List </h1>
-      <div> AmountSum</div>
-      <div> Count : {value} </div>
-      <table>
-        <thead>
-          <tr> 
-            <th> Expense Category </th>
-            <th> Expense Name </th>
-            <th> Amount </th>
-            <th> Date </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr> <></> <style>{"table{border:1px solid black;}"}</style>
-            <td>
-              {data.map(item => (
-                <p key={item.id}>{item.expenseCategory}</p>
-              ))}</td>
-            <td>
-              {data.map(item => (
-                <p key={item.id}>{item.expenseName}</p>
-              ))} </td>
-            <td>
-              {data.map(item => (
-                <p key={item.id}> {item.expenseAmount}$</p>
-              ))}   </td>
-            <td>
-              {data.map(item => (
-                <p key={item.id}> {item.date}</p>
-              ))}</td> </tr>
-        </tbody>
-
-      </table>
-    </div></>
+    <>
+      <style>{`
+        .grid-container {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+          gap: 10px;
+          border: 1px solid black;
+        }
+        .grid-item-header {
+          font-weight: bold;
+          border-bottom: 1px solid black;
+        }
+        .grid-item {
+          border-bottom: 1px solid #ddd;
+          padding: 8px;
+        }
+      `}</style>
+      <div>
+        <h1> Expenses List </h1>
+        <div> Amount Sum :</div>
+        <div> Count : {value} </div>
+        <div className="grid-container">
+          {/* Grid Headers */}
+          <div className="grid-item-header">Expense Category</div>
+          <div className="grid-item-header">Expense Name</div>
+          <div className="grid-item-header">Amount</div>
+          <div className="grid-item-header">Date</div>
+  
+          {/* Grid Data */}
+          {data.map(item => (
+            <>
+              <div className="grid-item">{item.expenseCategory}</div>
+              <div className="grid-item">{item.expenseName}</div>
+              <div className="grid-item">{item.expenseAmount}$</div>
+              <div className="grid-item">
+                {(() => {
+                  const date = new Date(item.date);
+                  const formattedDate = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+                  return formattedDate;
+                })()}
+              </div>
+            </>
+          ))}
+        </div>
+      </div>
+    </>
   );
+  
 }
 export default App;
